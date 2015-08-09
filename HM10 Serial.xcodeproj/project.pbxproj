@@ -1,0 +1,426 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FA5AB96B1B77A30F007443C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AB96A1B77A30F007443C8 /* AppDelegate.swift */; };
+		FA5AB96D1B77A30F007443C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AB96C1B77A30F007443C8 /* ViewController.swift */; };
+		FA5AB9701B77A30F007443C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5AB96E1B77A30F007443C8 /* Main.storyboard */; };
+		FA5AB9721B77A30F007443C8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA5AB9711B77A30F007443C8 /* Images.xcassets */; };
+		FA5AB9751B77A30F007443C8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5AB9731B77A30F007443C8 /* LaunchScreen.xib */; };
+		FA5AB9811B77A30F007443C8 /* HM10_SerialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AB9801B77A30F007443C8 /* HM10_SerialTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FA5AB97B1B77A30F007443C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA5AB95D1B77A30E007443C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA5AB9641B77A30E007443C8;
+			remoteInfo = "HM10 Serial";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FA5AB9651B77A30E007443C8 /* HM10 Serial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HM10 Serial.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA5AB9691B77A30F007443C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA5AB96A1B77A30F007443C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FA5AB96C1B77A30F007443C8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FA5AB96F1B77A30F007443C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FA5AB9711B77A30F007443C8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		FA5AB9741B77A30F007443C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		FA5AB97A1B77A30F007443C8 /* HM10 SerialTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HM10 SerialTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA5AB97F1B77A30F007443C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA5AB9801B77A30F007443C8 /* HM10_SerialTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HM10_SerialTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FA5AB9621B77A30E007443C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA5AB9771B77A30F007443C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FA5AB95C1B77A30E007443C8 = {
+			isa = PBXGroup;
+			children = (
+				FA5AB9671B77A30E007443C8 /* HM10 Serial */,
+				FA5AB97D1B77A30F007443C8 /* HM10 SerialTests */,
+				FA5AB9661B77A30E007443C8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FA5AB9661B77A30E007443C8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FA5AB9651B77A30E007443C8 /* HM10 Serial.app */,
+				FA5AB97A1B77A30F007443C8 /* HM10 SerialTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FA5AB9671B77A30E007443C8 /* HM10 Serial */ = {
+			isa = PBXGroup;
+			children = (
+				FA5AB96A1B77A30F007443C8 /* AppDelegate.swift */,
+				FA5AB96C1B77A30F007443C8 /* ViewController.swift */,
+				FA5AB96E1B77A30F007443C8 /* Main.storyboard */,
+				FA5AB9711B77A30F007443C8 /* Images.xcassets */,
+				FA5AB9731B77A30F007443C8 /* LaunchScreen.xib */,
+				FA5AB9681B77A30E007443C8 /* Supporting Files */,
+			);
+			path = "HM10 Serial";
+			sourceTree = "<group>";
+		};
+		FA5AB9681B77A30E007443C8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA5AB9691B77A30F007443C8 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FA5AB97D1B77A30F007443C8 /* HM10 SerialTests */ = {
+			isa = PBXGroup;
+			children = (
+				FA5AB9801B77A30F007443C8 /* HM10_SerialTests.swift */,
+				FA5AB97E1B77A30F007443C8 /* Supporting Files */,
+			);
+			path = "HM10 SerialTests";
+			sourceTree = "<group>";
+		};
+		FA5AB97E1B77A30F007443C8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA5AB97F1B77A30F007443C8 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FA5AB9641B77A30E007443C8 /* HM10 Serial */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA5AB9841B77A30F007443C8 /* Build configuration list for PBXNativeTarget "HM10 Serial" */;
+			buildPhases = (
+				FA5AB9611B77A30E007443C8 /* Sources */,
+				FA5AB9621B77A30E007443C8 /* Frameworks */,
+				FA5AB9631B77A30E007443C8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HM10 Serial";
+			productName = "HM10 Serial";
+			productReference = FA5AB9651B77A30E007443C8 /* HM10 Serial.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FA5AB9791B77A30F007443C8 /* HM10 SerialTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA5AB9871B77A30F007443C8 /* Build configuration list for PBXNativeTarget "HM10 SerialTests" */;
+			buildPhases = (
+				FA5AB9761B77A30F007443C8 /* Sources */,
+				FA5AB9771B77A30F007443C8 /* Frameworks */,
+				FA5AB9781B77A30F007443C8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FA5AB97C1B77A30F007443C8 /* PBXTargetDependency */,
+			);
+			name = "HM10 SerialTests";
+			productName = "HM10 SerialTests";
+			productReference = FA5AB97A1B77A30F007443C8 /* HM10 SerialTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FA5AB95D1B77A30E007443C8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "Balancing Rock";
+				TargetAttributes = {
+					FA5AB9641B77A30E007443C8 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					FA5AB9791B77A30F007443C8 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = FA5AB9641B77A30E007443C8;
+					};
+				};
+			};
+			buildConfigurationList = FA5AB9601B77A30E007443C8 /* Build configuration list for PBXProject "HM10 Serial" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FA5AB95C1B77A30E007443C8;
+			productRefGroup = FA5AB9661B77A30E007443C8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FA5AB9641B77A30E007443C8 /* HM10 Serial */,
+				FA5AB9791B77A30F007443C8 /* HM10 SerialTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FA5AB9631B77A30E007443C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA5AB9701B77A30F007443C8 /* Main.storyboard in Resources */,
+				FA5AB9751B77A30F007443C8 /* LaunchScreen.xib in Resources */,
+				FA5AB9721B77A30F007443C8 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA5AB9781B77A30F007443C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FA5AB9611B77A30E007443C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA5AB96D1B77A30F007443C8 /* ViewController.swift in Sources */,
+				FA5AB96B1B77A30F007443C8 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA5AB9761B77A30F007443C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA5AB9811B77A30F007443C8 /* HM10_SerialTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FA5AB97C1B77A30F007443C8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA5AB9641B77A30E007443C8 /* HM10 Serial */;
+			targetProxy = FA5AB97B1B77A30F007443C8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FA5AB96E1B77A30F007443C8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA5AB96F1B77A30F007443C8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FA5AB9731B77A30F007443C8 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA5AB9741B77A30F007443C8 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FA5AB9821B77A30F007443C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FA5AB9831B77A30F007443C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FA5AB9851B77A30F007443C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "HM10 Serial/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FA5AB9861B77A30F007443C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "HM10 Serial/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		FA5AB9881B77A30F007443C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "HM10 SerialTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HM10 Serial.app/HM10 Serial";
+			};
+			name = Debug;
+		};
+		FA5AB9891B77A30F007443C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "HM10 SerialTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HM10 Serial.app/HM10 Serial";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FA5AB9601B77A30E007443C8 /* Build configuration list for PBXProject "HM10 Serial" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA5AB9821B77A30F007443C8 /* Debug */,
+				FA5AB9831B77A30F007443C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA5AB9841B77A30F007443C8 /* Build configuration list for PBXNativeTarget "HM10 Serial" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA5AB9851B77A30F007443C8 /* Debug */,
+				FA5AB9861B77A30F007443C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		FA5AB9871B77A30F007443C8 /* Build configuration list for PBXNativeTarget "HM10 SerialTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA5AB9881B77A30F007443C8 /* Debug */,
+				FA5AB9891B77A30F007443C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FA5AB95D1B77A30E007443C8 /* Project object */;
+}
