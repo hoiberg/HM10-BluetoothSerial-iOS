@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA36BB9C1B7CE40E0079C257 /* icon_no_background.png in Resources */ = {isa = PBXBuildFile; fileRef = FA36BB9B1B7CE40E0079C257 /* icon_no_background.png */; };
 		FA5AB96B1B77A30F007443C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AB96A1B77A30F007443C8 /* AppDelegate.swift */; };
-		FA5AB96D1B77A30F007443C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AB96C1B77A30F007443C8 /* ViewController.swift */; };
 		FA5AB9701B77A30F007443C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5AB96E1B77A30F007443C8 /* Main.storyboard */; };
 		FA5AB9721B77A30F007443C8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA5AB9711B77A30F007443C8 /* Images.xcassets */; };
 		FA5AB9751B77A30F007443C8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5AB9731B77A30F007443C8 /* LaunchScreen.xib */; };
 		FA5AB9811B77A30F007443C8 /* HM10_SerialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AB9801B77A30F007443C8 /* HM10_SerialTests.swift */; };
+		FA5AB98B1B77A398007443C8 /* DZBluetoothSerialHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AB98A1B77A398007443C8 /* DZBluetoothSerialHandler.swift */; };
+		FA73A0341B78F4C5005EFDB6 /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA73A0331B78F4C5005EFDB6 /* ConnectViewController.swift */; };
+		FA73A0361B78FEB0005EFDB6 /* SerialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA73A0351B78FEB0005EFDB6 /* SerialViewController.swift */; };
+		FA73A03A1B790C33005EFDB6 /* PreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA73A0391B790C33005EFDB6 /* PreferencesTableViewController.swift */; };
+		FA755D301B78B8FE00A902FE /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA755D2F1B78B8FE00A902FE /* ScannerViewController.swift */; };
+		FAEB7CE61B78998C00F1141C /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB7CE51B78998C00F1141C /* StartViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,16 +32,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FA5AB9651B77A30E007443C8 /* HM10 Serial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HM10 Serial.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA36BB9B1B7CE40E0079C257 /* icon_no_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_no_background.png; sourceTree = "<group>"; };
+		FA5AB9651B77A30E007443C8 /* Serial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Serial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA5AB9691B77A30F007443C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA5AB96A1B77A30F007443C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FA5AB96C1B77A30F007443C8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FA5AB96F1B77A30F007443C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FA5AB9711B77A30F007443C8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FA5AB9741B77A30F007443C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		FA5AB97A1B77A30F007443C8 /* HM10 SerialTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HM10 SerialTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA5AB97F1B77A30F007443C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA5AB9801B77A30F007443C8 /* HM10_SerialTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HM10_SerialTests.swift; sourceTree = "<group>"; };
+		FA5AB98A1B77A398007443C8 /* DZBluetoothSerialHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DZBluetoothSerialHandler.swift; sourceTree = "<group>"; };
+		FA73A0331B78F4C5005EFDB6 /* ConnectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
+		FA73A0351B78FEB0005EFDB6 /* SerialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerialViewController.swift; sourceTree = "<group>"; };
+		FA73A0391B790C33005EFDB6 /* PreferencesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesTableViewController.swift; sourceTree = "<group>"; };
+		FA755D2F1B78B8FE00A902FE /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		FAEB7CE51B78998C00F1141C /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +80,7 @@
 		FA5AB9661B77A30E007443C8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FA5AB9651B77A30E007443C8 /* HM10 Serial.app */,
+				FA5AB9651B77A30E007443C8 /* Serial.app */,
 				FA5AB97A1B77A30F007443C8 /* HM10 SerialTests.xctest */,
 			);
 			name = Products;
@@ -78,10 +90,16 @@
 			isa = PBXGroup;
 			children = (
 				FA5AB96A1B77A30F007443C8 /* AppDelegate.swift */,
-				FA5AB96C1B77A30F007443C8 /* ViewController.swift */,
+				FAEB7CE51B78998C00F1141C /* StartViewController.swift */,
+				FA755D2F1B78B8FE00A902FE /* ScannerViewController.swift */,
+				FA73A0331B78F4C5005EFDB6 /* ConnectViewController.swift */,
+				FA73A0351B78FEB0005EFDB6 /* SerialViewController.swift */,
+				FA73A0391B790C33005EFDB6 /* PreferencesTableViewController.swift */,
+				FA5AB98A1B77A398007443C8 /* DZBluetoothSerialHandler.swift */,
 				FA5AB96E1B77A30F007443C8 /* Main.storyboard */,
 				FA5AB9711B77A30F007443C8 /* Images.xcassets */,
 				FA5AB9731B77A30F007443C8 /* LaunchScreen.xib */,
+				FA36BB9B1B7CE40E0079C257 /* icon_no_background.png */,
 				FA5AB9681B77A30E007443C8 /* Supporting Files */,
 			);
 			path = "HM10 Serial";
@@ -115,9 +133,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FA5AB9641B77A30E007443C8 /* HM10 Serial */ = {
+		FA5AB9641B77A30E007443C8 /* Serial */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FA5AB9841B77A30F007443C8 /* Build configuration list for PBXNativeTarget "HM10 Serial" */;
+			buildConfigurationList = FA5AB9841B77A30F007443C8 /* Build configuration list for PBXNativeTarget "Serial" */;
 			buildPhases = (
 				FA5AB9611B77A30E007443C8 /* Sources */,
 				FA5AB9621B77A30E007443C8 /* Frameworks */,
@@ -127,9 +145,9 @@
 			);
 			dependencies = (
 			);
-			name = "HM10 Serial";
+			name = Serial;
 			productName = "HM10 Serial";
-			productReference = FA5AB9651B77A30E007443C8 /* HM10 Serial.app */;
+			productReference = FA5AB9651B77A30E007443C8 /* Serial.app */;
 			productType = "com.apple.product-type.application";
 		};
 		FA5AB9791B77A30F007443C8 /* HM10 SerialTests */ = {
@@ -181,7 +199,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FA5AB9641B77A30E007443C8 /* HM10 Serial */,
+				FA5AB9641B77A30E007443C8 /* Serial */,
 				FA5AB9791B77A30F007443C8 /* HM10 SerialTests */,
 			);
 		};
@@ -193,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA5AB9701B77A30F007443C8 /* Main.storyboard in Resources */,
+				FA36BB9C1B7CE40E0079C257 /* icon_no_background.png in Resources */,
 				FA5AB9751B77A30F007443C8 /* LaunchScreen.xib in Resources */,
 				FA5AB9721B77A30F007443C8 /* Images.xcassets in Resources */,
 			);
@@ -212,8 +231,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA5AB96D1B77A30F007443C8 /* ViewController.swift in Sources */,
+				FA73A0341B78F4C5005EFDB6 /* ConnectViewController.swift in Sources */,
+				FA5AB98B1B77A398007443C8 /* DZBluetoothSerialHandler.swift in Sources */,
+				FA73A0361B78FEB0005EFDB6 /* SerialViewController.swift in Sources */,
+				FA73A03A1B790C33005EFDB6 /* PreferencesTableViewController.swift in Sources */,
 				FA5AB96B1B77A30F007443C8 /* AppDelegate.swift in Sources */,
+				FAEB7CE61B78998C00F1141C /* StartViewController.swift in Sources */,
+				FA755D301B78B8FE00A902FE /* ScannerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,7 +254,7 @@
 /* Begin PBXTargetDependency section */
 		FA5AB97C1B77A30F007443C8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = FA5AB9641B77A30E007443C8 /* HM10 Serial */;
+			target = FA5AB9641B77A30E007443C8 /* Serial */;
 			targetProxy = FA5AB97B1B77A30F007443C8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -345,6 +369,8 @@
 				INFOPLIST_FILE = "HM10 Serial/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "10edb111-7f29-4980-ab6b-eb12d1ff824f";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -355,6 +381,8 @@
 				INFOPLIST_FILE = "HM10 Serial/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "10edb111-7f29-4980-ab6b-eb12d1ff824f";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -404,13 +432,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FA5AB9841B77A30F007443C8 /* Build configuration list for PBXNativeTarget "HM10 Serial" */ = {
+		FA5AB9841B77A30F007443C8 /* Build configuration list for PBXNativeTarget "Serial" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FA5AB9851B77A30F007443C8 /* Debug */,
 				FA5AB9861B77A30F007443C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FA5AB9871B77A30F007443C8 /* Build configuration list for PBXNativeTarget "HM10 SerialTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +448,7 @@
 				FA5AB9891B77A30F007443C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
