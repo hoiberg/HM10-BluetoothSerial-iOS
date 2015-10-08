@@ -28,10 +28,10 @@ var serial: DZBluetoothSerialHandler!
     optional func serialHandlerDidConnect(peripheral: CBPeripheral)
     
     /// Called when a peripheral disconnected
-    optional func serialHandlerDidDisconnect(peripheral: CBPeripheral, error: NSError)
+    optional func serialHandlerDidDisconnect(peripheral: CBPeripheral, error: NSError?)
     
     /// Called when a pending connection failed
-    optional func serialHandlerDidFailToConnect(peripheral: CBPeripheral, error: NSError)
+    optional func serialHandlerDidFailToConnect(peripheral: CBPeripheral, error: NSError?)
     
     /// Called when a peripheral is ready for communication
     optional func serialHandlerIsReady(peripheral: CBPeripheral)
