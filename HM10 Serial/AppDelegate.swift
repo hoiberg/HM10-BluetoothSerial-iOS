@@ -8,6 +8,10 @@
 
 import UIKit
 
+let MessageOptionKey = "MessageOption"
+let ReceivedMessageOptionKey = "ReceivedMessageOption"
+let WriteWithResponseKey = "WriteWithResponse"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,7 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         // register default user prefs
-        NSUserDefaults.standardUserDefaults().registerDefaults(["MessageOption": MessageOption.NoLineEnding.rawValue, "ReceivedMessageOption": ReceivedMessageOption.Nothing.rawValue])
+        NSUserDefaults.standardUserDefaults().registerDefaults([MessageOptionKey: MessageOption.NoLineEnding.rawValue,
+                                                                ReceivedMessageOptionKey: ReceivedMessageOption.Nothing.rawValue,
+                                                                WriteWithResponseKey: true
+        ])
         
         return true
     }

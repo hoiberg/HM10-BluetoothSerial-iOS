@@ -44,6 +44,7 @@ class SerialViewController: UIViewController, UITextFieldDelegate, DZBluetoothSe
         
         // init serial
         serial = DZBluetoothSerialHandler(delegate: self)
+        serial.writeWithResponse = NSUserDefaults.standardUserDefaults().boolForKey(WriteWithResponseKey)
         
         // UI
         mainTextView.text = ""
@@ -81,8 +82,8 @@ class SerialViewController: UIViewController, UITextFieldDelegate, DZBluetoothSe
     func keyboardWillShow(notification: NSNotification) {
         // animate the text field to stay above the keyboard
         var info = notification.userInfo!
-        var value = info[UIKeyboardFrameEndUserInfoKey] as! NSValue
-        var keyboardFrame = value.CGRectValue()
+        let value = info[UIKeyboardFrameEndUserInfoKey] as! NSValue
+        let keyboardFrame = value.CGRectValue()
         
         //TODO: Not animating properly
         UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
@@ -117,7 +118,7 @@ class SerialViewController: UIViewController, UITextFieldDelegate, DZBluetoothSe
     }
     
     func textViewScrollToBottom() {
-        var range = NSMakeRange(NSString(string: mainTextView.text).length - 1, 1)
+        let range = NSMakeRange(NSString(string: mainTextView.text).length - 1, 1)
         mainTextView.scrollRangeToVisible(range)
     }
     
@@ -127,7 +128,7 @@ class SerialViewController: UIViewController, UITextFieldDelegate, DZBluetoothSe
     func serialHandlerDidReceiveMessage(message: String) {
         // add the received text to the textView, optionally with a line break at the end
         mainTextView.text! += serial.read()
-        let pref = NSUserDefaults.standardUserDefaults().integerForKey("ReceivedMessageOption")
+        let pref = NSUserDefaults.standardUserDefaults().integerForKey(ReceivedMessageOptionKey)
         if pref == ReceivedMessageOption.Newline.rawValue { mainTextView.text! += "\n" }
         textViewScrollToBottom()
     }
@@ -165,7 +166,7 @@ class SerialViewController: UIViewController, UITextFieldDelegate, DZBluetoothSe
         
         // send the message to the bluetooth device
         // but fist, add optionally a line break or carriage return (or both) to the message
-        let pref = NSUserDefaults.standardUserDefaults().integerForKey("MessageOption")
+        let pref = NSUserDefaults.standardUserDefaults().integerForKey(MessageOptionKey)
         var msg = messageField.text!
         switch pref {
         case MessageOption.Newline.rawValue:

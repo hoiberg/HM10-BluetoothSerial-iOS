@@ -14,6 +14,7 @@ class PreferencesTableViewController: UITableViewController {
     
     var selectedMessageOption: MessageOption!
     var selectedReceivedMessageOption: ReceivedMessageOption!
+    var writeWithResponse = false
 
 
 //MARK: Functions
@@ -22,12 +23,10 @@ class PreferencesTableViewController: UITableViewController {
         super.viewDidLoad()
         
         // get current prefs
-        selectedMessageOption = MessageOption(rawValue: NSUserDefaults.standardUserDefaults().integerForKey("MessageOption"))
-        selectedReceivedMessageOption = ReceivedMessageOption(rawValue: NSUserDefaults.standardUserDefaults().integerForKey("ReceivedMessageOption"))
+        selectedMessageOption = MessageOption(rawValue: NSUserDefaults.standardUserDefaults().integerForKey(MessageOptionKey))
+        selectedReceivedMessageOption = ReceivedMessageOption(rawValue: NSUserDefaults.standardUserDefaults().integerForKey(ReceivedMessageOptionKey))
+        writeWithResponse = NSUserDefaults.standardUserDefaults().boolForKey(WriteWithResponseKey)
         
-        // set checkmarks
-        tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedMessageOption.rawValue, inSection: 0))?.accessoryType = UITableViewCellAccessoryType.Checkmark
-        tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedReceivedMessageOption.rawValue, inSection: 1))?.accessoryType = .Checkmark
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,7 +56,7 @@ class PreferencesTableViewController: UITableViewController {
             tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedCell, inSection: 0))?.accessoryType = UITableViewCellAccessoryType.Checkmark
             
             // and finally .. save it
-            NSUserDefaults.standardUserDefaults().setInteger(selectedCell, forKey: "MessageOption")
+            NSUserDefaults.standardUserDefaults().setInteger(selectedCell, forKey: MessageOptionKey)
             
         } else if indexPath.section == 1 {
             
@@ -73,7 +72,25 @@ class PreferencesTableViewController: UITableViewController {
             tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedCell, inSection: 1))?.accessoryType = UITableViewCellAccessoryType.Checkmark
             
             // save it
-            NSUserDefaults.standardUserDefaults().setInteger(selectedCell, forKey: "ReceivedMessageOption")
+            NSUserDefaults.standardUserDefaults().setInteger(selectedCell, forKey: ReceivedMessageOptionKey)
+
+        } else if indexPath.section == 2 {
+            
+            // first, clear the old checkmark
+            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2))?.accessoryType = .None
+            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 2))?.accessoryType = .None
+            
+            // get the newly selected option
+            writeWithResponse = indexPath.row == 0 ? false : true
+            
+            // set new checkmark
+            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row, inSection: 2))?.accessoryType = UITableViewCellAccessoryType.Checkmark
+            
+            // save it
+            NSUserDefaults.standardUserDefaults().setBool(writeWithResponse, forKey: WriteWithResponseKey)
+            
+            // set it
+            serial.writeWithResponse = writeWithResponse
 
         }
         
@@ -87,6 +104,8 @@ class PreferencesTableViewController: UITableViewController {
         if indexPath.section == 0 && indexPath.row == selectedMessageOption.rawValue {
             cell.accessoryType = .Checkmark
         } else  if indexPath.section == 1 && indexPath.row == selectedReceivedMessageOption.rawValue {
+            cell.accessoryType = .Checkmark
+        } else if indexPath.section == 2 && indexPath.row == Int(writeWithResponse) {
             cell.accessoryType = .Checkmark
         }
     }

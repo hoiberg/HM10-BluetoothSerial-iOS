@@ -72,7 +72,7 @@ class ScannerViewController: UIViewController, UITableViewDataSource, UITableVie
     func connectTimeOut() {
         
         // don't if we've already connected
-        if let per = serial.connectedPeripheral {
+        if let _ = serial.connectedPeripheral {
             return
         }
         
@@ -85,7 +85,7 @@ class ScannerViewController: UIViewController, UITableViewDataSource, UITableVie
             selectedPeripheral = nil
         }
         
-        var hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
         hud.mode = MBProgressHUDMode.Text
         hud.labelText = "Failed to connect"
         hud.hide(true, afterDelay: 2)
@@ -104,7 +104,7 @@ class ScannerViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // return a cell with the peripheral name as text in the label
-        var cell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell")!
         let label = cell.viewWithTag(1) as! UILabel!
         label.text = peripherals[indexPath.row].peripheral.name
         return cell
@@ -138,7 +138,7 @@ class ScannerViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // add to the array, next sort & reload
         peripherals.append(peripheral: peripheral, RSSI: RSSI.floatValue)
-        peripherals.sort { $0.RSSI < $1.RSSI }
+        peripherals.sortInPlace { $0.RSSI < $1.RSSI }
         tableView.reloadData()
     }
     
