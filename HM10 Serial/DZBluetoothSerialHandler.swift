@@ -215,12 +215,15 @@ final class DZBluetoothSerialHandler: NSObject, CBCentralManagerDelegate, CBPeri
     func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
         
         // there is new data for us! Update the buffer!
-        let newStr = NSString(data: characteristic.value!, encoding: NSUTF8StringEncoding) as! String
-        buffer += newStr
-        
-        // notify the delegate of the new string
-        if delegate.respondsToSelector(Selector("serialHandlerDidReceiveMessage:")) {
-            delegate!.serialHandlerDidReceiveMessage!(newStr)
+        if let newStr = String(data: characteristic.value!, encoding: NSUTF8StringEncoding) {
+            buffer += newStr
+            
+            // notify the delegate of the new string
+            if delegate.respondsToSelector(Selector("serialHandlerDidReceiveMessage:")) {
+                delegate!.serialHandlerDidReceiveMessage!(newStr)
+            }
+        } else {
+            print("** Received an invalid string! **")
         }
     }
 

@@ -186,7 +186,7 @@
 				TargetAttributes = {
 					FA5AB9641B77A30E007443C8 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 7P4D6LHV5G;
+						DevelopmentTeam = B22Z7NLA6E;
 					};
 					FA5AB9791B77A30F007443C8 = {
 						CreatedOnToolsVersion = 6.4;
@@ -377,6 +377,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "HM10 Serial/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nl.balancingrock.bluetoothserial;
@@ -395,6 +396,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "HM10 Serial/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nl.balancingrock.bluetoothserial;
@@ -418,7 +420,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.balancingrock.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HM10 Serial.app/HM10 Serial";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Serial.app/Serial";
 			};
 			name = Debug;
 		};
@@ -431,7 +433,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.balancingrock.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HM10 Serial.app/HM10 Serial";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Serial.app/Serial";
 			};
 			name = Release;
 		};
