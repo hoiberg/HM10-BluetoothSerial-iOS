@@ -9,9 +9,8 @@
 import UIKit
 import CoreBluetooth
 
-class ScannerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DZBluetoothSerialDelegate {
+final class ScannerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, BluetoothSerialDelegate {
 
-   
 //MARK: IBOutlets
     
     @IBOutlet weak var tryAgainButton: UIBarButtonItem!
@@ -45,13 +44,13 @@ class ScannerViewController: UIViewController, UITableViewDataSource, UITableVie
         serial.delegate = self
         
         if serial.state != .PoweredOn {
-            title = "Bluetooth not turned on!"
+            title = "Bluetooth not turned on"
             return
         }
         
         // start scanning and schedule the time out
-        serial.scanForPeripherals()
-        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "scanTimeOut", userInfo: nil, repeats: false)
+        serial.startScan()
+        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(ScannerViewController.scanTimeOut), userInfo: nil, repeats: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,9 +60,8 @@ class ScannerViewController: UIViewController, UITableViewDataSource, UITableVie
     
     /// Should be called 10s after we've begun scanning
     func scanTimeOut() {
-                
         // timeout has occurred, stop scanning and give the user the option to try again
-        serial.stopScanning()
+        serial.stopScan()
         tryAgainButton.enabled = true
         title = "Done scanning"
     }
@@ -80,8 +78,8 @@ class ScannerViewController: UIViewController, UITableViewDataSource, UITableVie
             hud.hide(false)
         }
         
-        if let per = selectedPeripheral {
-            serial.cancelPeripheralConnection(per)
+        if let _ = selectedPeripheral {
+            serial.disconnect()
             selectedPeripheral = nil
         }
         
@@ -118,32 +116,32 @@ class ScannerViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         // the user has selected a peripheral, so stop scanning and proceed to the next view
-        serial.stopScanning()
+        serial.stopScan()
         selectedPeripheral = peripherals[indexPath.row].peripheral
         serial.connectToPeripheral(selectedPeripheral!)
         progressHUD = MBProgressHUD.showHUDAddedTo(view, animated: true)
         progressHUD!.labelText = "Connecting"
         
-        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "connectTimeOut", userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(ScannerViewController.connectTimeOut), userInfo: nil, repeats: false)
     }
     
     
-//MARK: DZBluetoothSerialDelegate
+//MARK: BluetoothSerialDelegate
     
-    func serialHandlerDidDiscoverPeripheral(peripheral: CBPeripheral, RSSI: NSNumber) {
+    func serialDidDiscoverPeripheral(peripheral: CBPeripheral, RSSI: NSNumber?) {
         // check whether it is a duplicate
         for exisiting in peripherals {
             if exisiting.peripheral.identifier == peripheral.identifier { return }
         }
         
         // add to the array, next sort & reload
-        peripherals.append(peripheral: peripheral, RSSI: RSSI.floatValue)
+        let theRSSI = RSSI?.floatValue ?? 0.0
+        peripherals.append(peripheral: peripheral, RSSI: theRSSI)
         peripherals.sortInPlace { $0.RSSI < $1.RSSI }
         tableView.reloadData()
     }
     
-    func serialHandlerDidFailToConnect(peripheral: CBPeripheral, error: NSError?) {
-        
+    func serialDidFailToConnect(peripheral: CBPeripheral, error: NSError?) {
         if let hud = progressHUD {
             hud.hide(false)
         }
@@ -156,8 +154,7 @@ class ScannerViewController: UIViewController, UITableViewDataSource, UITableVie
         hud.hide(true, afterDelay: 1.0)
     }
     
-    func serialHandlerDidDisconnect(peripheral: CBPeripheral, error: NSError?) {
-        
+    func serialDidDisconnect(peripheral: CBPeripheral, error: NSError?) {
         if let hud = progressHUD {
             hud.hide(false)
         }
@@ -171,8 +168,7 @@ class ScannerViewController: UIViewController, UITableViewDataSource, UITableVie
 
     }
     
-    func serialHandlerIsReady(peripheral: CBPeripheral) {
-        
+    func serialIsReady(peripheral: CBPeripheral) {
         if let hud = progressHUD {
             hud.hide(false)
         }
@@ -181,27 +177,23 @@ class ScannerViewController: UIViewController, UITableViewDataSource, UITableVie
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func serialHandlerDidChangeState(newState: CBCentralManagerState) {
-        
+    func serialDidChangeState(newState: CBCentralManagerState) {
         if let hud = progressHUD {
             hud.hide(false)
         }
         
         if newState != .PoweredOn {
-            tryAgainButton.enabled = false
-            title = "Bluetooth not turned on!"
-        } else {
-            tryAgainButton.enabled = true
-            title = "Ready to scan"
-            
+            NSNotificationCenter.defaultCenter().postNotificationName("reloadStartViewController", object: self)
+            dismissViewControllerAnimated(true, completion: nil)
         }
     }
     
 
 //MARK: IBActions
+    
     @IBAction func cancel(sender: AnyObject) {
         // go back
-        serial.stopScanning()
+        serial.stopScan()
         dismissViewControllerAnimated(true, completion: nil)
     }
 
@@ -211,8 +203,8 @@ class ScannerViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.reloadData()
         tryAgainButton.enabled = false
         title = "Scanning ..."
-        serial.scanForPeripherals()
-        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "scanTimeOut", userInfo: nil, repeats: false)
+        serial.startScan()
+        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(ScannerViewController.scanTimeOut), userInfo: nil, repeats: false)
     }
     
 }

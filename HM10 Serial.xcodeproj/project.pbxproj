@@ -13,7 +13,7 @@
 		FA5AB9721B77A30F007443C8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA5AB9711B77A30F007443C8 /* Images.xcassets */; };
 		FA5AB9751B77A30F007443C8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5AB9731B77A30F007443C8 /* LaunchScreen.xib */; };
 		FA5AB9811B77A30F007443C8 /* HM10_SerialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AB9801B77A30F007443C8 /* HM10_SerialTests.swift */; };
-		FA5AB98B1B77A398007443C8 /* DZBluetoothSerialHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AB98A1B77A398007443C8 /* DZBluetoothSerialHandler.swift */; };
+		FA5AB98B1B77A398007443C8 /* BluetoothSerial.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AB98A1B77A398007443C8 /* BluetoothSerial.swift */; };
 		FA62F58D1B8B85B3000479B6 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = FA62F58C1B8B85B3000479B6 /* MBProgressHUD.m */; };
 		FA73A0361B78FEB0005EFDB6 /* SerialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA73A0351B78FEB0005EFDB6 /* SerialViewController.swift */; };
 		FA73A03A1B790C33005EFDB6 /* PreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA73A0391B790C33005EFDB6 /* PreferencesTableViewController.swift */; };
@@ -41,7 +41,7 @@
 		FA5AB97A1B77A30F007443C8 /* HM10 SerialTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HM10 SerialTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA5AB97F1B77A30F007443C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA5AB9801B77A30F007443C8 /* HM10_SerialTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HM10_SerialTests.swift; sourceTree = "<group>"; };
-		FA5AB98A1B77A398007443C8 /* DZBluetoothSerialHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DZBluetoothSerialHandler.swift; sourceTree = "<group>"; };
+		FA5AB98A1B77A398007443C8 /* BluetoothSerial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothSerial.swift; sourceTree = "<group>"; };
 		FA62F58A1B8B85B2000479B6 /* Serial-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Serial-Bridging-Header.h"; sourceTree = "<group>"; };
 		FA62F58B1B8B85B3000479B6 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		FA62F58C1B8B85B3000479B6 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -95,12 +95,12 @@
 				FA73A0351B78FEB0005EFDB6 /* SerialViewController.swift */,
 				FA755D2F1B78B8FE00A902FE /* ScannerViewController.swift */,
 				FA73A0391B790C33005EFDB6 /* PreferencesTableViewController.swift */,
-				FA5AB98A1B77A398007443C8 /* DZBluetoothSerialHandler.swift */,
+				FA5AB98A1B77A398007443C8 /* BluetoothSerial.swift */,
 				FA62F58B1B8B85B3000479B6 /* MBProgressHUD.h */,
 				FA62F58C1B8B85B3000479B6 /* MBProgressHUD.m */,
 				FA5AB96E1B77A30F007443C8 /* Main.storyboard */,
-				FA5AB9711B77A30F007443C8 /* Images.xcassets */,
 				FA5AB9731B77A30F007443C8 /* LaunchScreen.xib */,
+				FA5AB9711B77A30F007443C8 /* Images.xcassets */,
 				FA36BB9B1B7CE40E0079C257 /* icon_no_background.png */,
 				FA5AB9681B77A30E007443C8 /* Supporting Files */,
 				FA62F58A1B8B85B2000479B6 /* Serial-Bridging-Header.h */,
@@ -239,7 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA5AB98B1B77A398007443C8 /* DZBluetoothSerialHandler.swift in Sources */,
+				FA5AB98B1B77A398007443C8 /* BluetoothSerial.swift in Sources */,
 				FA73A0361B78FEB0005EFDB6 /* SerialViewController.swift in Sources */,
 				FA73A03A1B790C33005EFDB6 /* PreferencesTableViewController.swift in Sources */,
 				FA5AB96B1B77A30F007443C8 /* AppDelegate.swift in Sources */,
@@ -375,8 +375,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Alex van der Lugt (B22Z7NLA6E)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Alex van der Lugt (B22Z7NLA6E)";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "HM10 Serial/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -394,8 +394,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Alex van der Lugt (B22Z7NLA6E)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Alex van der Lugt (B22Z7NLA6E)";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "HM10 Serial/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

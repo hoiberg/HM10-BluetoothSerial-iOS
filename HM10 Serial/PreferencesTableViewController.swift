@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PreferencesTableViewController: UITableViewController {
+final class PreferencesTableViewController: UITableViewController {
     
 //MARK: Variables
     
@@ -90,7 +90,7 @@ class PreferencesTableViewController: UITableViewController {
             NSUserDefaults.standardUserDefaults().setBool(writeWithResponse, forKey: WriteWithResponseKey)
             
             // set it
-            serial.writeWithResponse = writeWithResponse
+            serial.writeType = writeWithResponse ? .WithResponse : .WithoutResponse
 
         }
         

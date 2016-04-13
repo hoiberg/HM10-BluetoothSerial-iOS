@@ -12,27 +12,26 @@ import QuartzCore
 
 /// The option to add a \n or \r or \r\n to the end of the send message
 enum MessageOption: Int {
-    case NoLineEnding = 0
-    case Newline = 1
-    case CarriageReturn = 2
-    case CarriageReturnAndNewline = 3
+    case NoLineEnding,
+         Newline,
+         CarriageReturn,
+         CarriageReturnAndNewline
 }
 
 /// The option to add a \n to the end of the received message (to make it more readable)
 enum ReceivedMessageOption: Int {
-    case Nothing = 0
-    case Newline = 1
+    case None,
+         Newline
 }
 
-class SerialViewController: UIViewController, UITextFieldDelegate, DZBluetoothSerialDelegate {
+final class SerialViewController: UIViewController, UITextFieldDelegate, BluetoothSerialDelegate {
 
 //MARK: IBOutlets
     
     @IBOutlet weak var mainTextView: UITextView!
     @IBOutlet weak var messageField: UITextField!
     @IBOutlet weak var bottomView: UIView!
-    /// used to move the textField up when the keyboard is present
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint! // used to move the textField up when the keyboard is present
     @IBOutlet weak var barButton: UIBarButtonItem!
     @IBOutlet weak var navItem: UINavigationItem!
 
@@ -43,21 +42,21 @@ class SerialViewController: UIViewController, UITextFieldDelegate, DZBluetoothSe
         super.viewDidLoad()
         
         // init serial
-        serial = DZBluetoothSerialHandler(delegate: self)
-        serial.writeWithResponse = NSUserDefaults.standardUserDefaults().boolForKey(WriteWithResponseKey)
+        serial = BluetoothSerial(delegate: self)
+        serial.writeType = NSUserDefaults.standardUserDefaults().boolForKey(WriteWithResponseKey) ? .WithResponse : .WithoutResponse
         
         // UI
         mainTextView.text = ""
         reloadView()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("reloadView"), name: "reloadStartViewController", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SerialViewController.reloadView), name: "reloadStartViewController", object: nil)
         
         // we want to be notified when the keyboard is shown (so we can move the textField up)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SerialViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SerialViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
         
         // to dismiss the keyboard if the user taps outside the textField while editing
-        let tap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(SerialViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         
@@ -67,14 +66,8 @@ class SerialViewController: UIViewController, UITextFieldDelegate, DZBluetoothSe
         bottomView.layer.shadowRadius = 0
         bottomView.layer.shadowOpacity = 0.5
         bottomView.layer.shadowColor = UIColor.grayColor().CGColor
-        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
@@ -102,18 +95,24 @@ class SerialViewController: UIViewController, UITextFieldDelegate, DZBluetoothSe
     }
     
     func reloadView() {
-        
         // in case we're the visible view again
         serial.delegate = self
         
-        if serial.connectedPeripheral == nil {
-            navItem.title = "Bluetooth Serial"
-            barButton.title = "Connect"
-            barButton.tintColor = view.tintColor
-        } else {
+        if serial.isReady {
             navItem.title = serial.connectedPeripheral!.name
             barButton.title = "Disconnect"
             barButton.tintColor = UIColor.redColor()
+            barButton.enabled = true
+        } else if serial.state == .PoweredOn {
+            navItem.title = "Bluetooth Serial"
+            barButton.title = "Connect"
+            barButton.tintColor = view.tintColor
+            barButton.enabled = true
+        } else {
+            navItem.title = "Bluetooth Serial"
+            barButton.title = "Connect"
+            barButton.tintColor = view.tintColor
+            barButton.enabled = false
         }
     }
     
@@ -123,26 +122,29 @@ class SerialViewController: UIViewController, UITextFieldDelegate, DZBluetoothSe
     }
     
 
-//MARK: DZBluetoothSerialDelegate
+//MARK: BluetoothSerialDelegate
     
-    func serialHandlerDidReceiveMessage(message: String) {
+    func serialDidReceiveString(message: String) {
         // add the received text to the textView, optionally with a line break at the end
-        mainTextView.text! += serial.read()
+        mainTextView.text! += message
         let pref = NSUserDefaults.standardUserDefaults().integerForKey(ReceivedMessageOptionKey)
         if pref == ReceivedMessageOption.Newline.rawValue { mainTextView.text! += "\n" }
         textViewScrollToBottom()
     }
     
-    func serialHandlerDidDisconnect(peripheral: CBPeripheral, error: NSError?) {
+    func serialDidDisconnect(peripheral: CBPeripheral, error: NSError?) {
         reloadView()
+        dismissKeyboard()
         let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
         hud.mode = MBProgressHUDMode.Text
         hud.labelText = "Disconnected"
         hud.hide(true, afterDelay: 1.0)
     }
     
-    func serialHandlerDidChangeState(newState: CBCentralManagerState) {
+    func serialDidChangeState(newState: CBCentralManagerState) {
+        reloadView()
         if newState != .PoweredOn {
+            dismissKeyboard()
             let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
             hud.mode = MBProgressHUDMode.Text
             hud.labelText = "Bluetooth turned off"
@@ -154,9 +156,7 @@ class SerialViewController: UIViewController, UITextFieldDelegate, DZBluetoothSe
 //MARK: UITextFieldDelegate
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        
-        if serial.connectedPeripheral == nil {
-            
+        if !serial.isReady {
             let alert = UIAlertController(title: "Not connected", message: "What am I supposed to send this to?", preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: { action -> Void in self.dismissViewControllerAnimated(true, completion: nil) }))
             presentViewController(alert, animated: true, completion: nil)
@@ -199,7 +199,5 @@ class SerialViewController: UIViewController, UITextFieldDelegate, DZBluetoothSe
             serial.disconnect()
             reloadView()
         }
-        
     }
-
 }
