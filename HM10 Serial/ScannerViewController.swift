@@ -35,22 +35,22 @@ final class ScannerViewController: UIViewController, UITableViewDataSource, UITa
         super.viewDidLoad()
         
         // tryAgainButton is only enabled when we've stopped scanning
-        tryAgainButton.enabled = false
+        tryAgainButton.isEnabled = false
 
         // remove extra seperator insets (looks better imho)
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
 
         // tell the delegate to notificate US instead of the previous view if something happens
         serial.delegate = self
         
-        if serial.state != .PoweredOn {
+        if serial.centralManager.state != .poweredOn {
             title = "Bluetooth not turned on"
             return
         }
         
         // start scanning and schedule the time out
         serial.startScan()
-        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(ScannerViewController.scanTimeOut), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(ScannerViewController.scanTimeOut), userInfo: nil, repeats: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,7 +62,7 @@ final class ScannerViewController: UIViewController, UITableViewDataSource, UITa
     func scanTimeOut() {
         // timeout has occurred, stop scanning and give the user the option to try again
         serial.stopScan()
-        tryAgainButton.enabled = true
+        tryAgainButton.isEnabled = true
         title = "Done scanning"
     }
     
@@ -83,52 +83,52 @@ final class ScannerViewController: UIViewController, UITableViewDataSource, UITa
             selectedPeripheral = nil
         }
         
-        let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        hud.mode = MBProgressHUDMode.Text
-        hud.labelText = "Failed to connect"
-        hud.hide(true, afterDelay: 2)
+        let hud = MBProgressHUD.showAdded(to: view, animated: true)
+        hud?.mode = MBProgressHUDMode.text
+        hud?.labelText = "Failed to connect"
+        hud?.hide(true, afterDelay: 2)
     }
     
     
 //MARK: UITableViewDataSource
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return peripherals.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // return a cell with the peripheral name as text in the label
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
         let label = cell.viewWithTag(1) as! UILabel!
-        label.text = peripherals[indexPath.row].peripheral.name
+        label?.text = peripherals[(indexPath as NSIndexPath).row].peripheral.name
         return cell
     }
     
     
 //MARK: UITableViewDelegate
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         // the user has selected a peripheral, so stop scanning and proceed to the next view
         serial.stopScan()
-        selectedPeripheral = peripherals[indexPath.row].peripheral
+        selectedPeripheral = peripherals[(indexPath as NSIndexPath).row].peripheral
         serial.connectToPeripheral(selectedPeripheral!)
-        progressHUD = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        progressHUD = MBProgressHUD.showAdded(to: view, animated: true)
         progressHUD!.labelText = "Connecting"
         
-        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(ScannerViewController.connectTimeOut), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(ScannerViewController.connectTimeOut), userInfo: nil, repeats: false)
     }
     
     
 //MARK: BluetoothSerialDelegate
     
-    func serialDidDiscoverPeripheral(peripheral: CBPeripheral, RSSI: NSNumber?) {
+    func serialDidDiscoverPeripheral(_ peripheral: CBPeripheral, RSSI: NSNumber?) {
         // check whether it is a duplicate
         for exisiting in peripherals {
             if exisiting.peripheral.identifier == peripheral.identifier { return }
@@ -137,74 +137,74 @@ final class ScannerViewController: UIViewController, UITableViewDataSource, UITa
         // add to the array, next sort & reload
         let theRSSI = RSSI?.floatValue ?? 0.0
         peripherals.append(peripheral: peripheral, RSSI: theRSSI)
-        peripherals.sortInPlace { $0.RSSI < $1.RSSI }
+        peripherals.sort { $0.RSSI < $1.RSSI }
         tableView.reloadData()
     }
     
-    func serialDidFailToConnect(peripheral: CBPeripheral, error: NSError?) {
+    func serialDidFailToConnect(_ peripheral: CBPeripheral, error: NSError?) {
         if let hud = progressHUD {
             hud.hide(false)
         }
         
-        tryAgainButton.enabled = true
+        tryAgainButton.isEnabled = true
                 
-        let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        hud.mode = MBProgressHUDMode.Text
-        hud.labelText = "Failed to connect"
-        hud.hide(true, afterDelay: 1.0)
+        let hud = MBProgressHUD.showAdded(to: view, animated: true)
+        hud?.mode = MBProgressHUDMode.text
+        hud?.labelText = "Failed to connect"
+        hud?.hide(true, afterDelay: 1.0)
     }
     
-    func serialDidDisconnect(peripheral: CBPeripheral, error: NSError?) {
+    func serialDidDisconnect(_ peripheral: CBPeripheral, error: NSError?) {
         if let hud = progressHUD {
             hud.hide(false)
         }
         
-        tryAgainButton.enabled = true
+        tryAgainButton.isEnabled = true
         
-        let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        hud.mode = MBProgressHUDMode.Text
-        hud.labelText = "Failed to connect"
-        hud.hide(true, afterDelay: 1.0)
+        let hud = MBProgressHUD.showAdded(to: view, animated: true)
+        hud?.mode = MBProgressHUDMode.text
+        hud?.labelText = "Failed to connect"
+        hud?.hide(true, afterDelay: 1.0)
 
     }
     
-    func serialIsReady(peripheral: CBPeripheral) {
+    func serialIsReady(_ peripheral: CBPeripheral) {
         if let hud = progressHUD {
             hud.hide(false)
         }
         
-        NSNotificationCenter.defaultCenter().postNotificationName("reloadStartViewController", object: self)
-        dismissViewControllerAnimated(true, completion: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadStartViewController"), object: self)
+        dismiss(animated: true, completion: nil)
     }
     
-    func serialDidChangeState(newState: CBCentralManagerState) {
+    func serialDidChangeState() {
         if let hud = progressHUD {
             hud.hide(false)
         }
         
-        if newState != .PoweredOn {
-            NSNotificationCenter.defaultCenter().postNotificationName("reloadStartViewController", object: self)
-            dismissViewControllerAnimated(true, completion: nil)
+        if serial.centralManager.state != .poweredOn {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadStartViewController"), object: self)
+            dismiss(animated: true, completion: nil)
         }
     }
     
 
 //MARK: IBActions
     
-    @IBAction func cancel(sender: AnyObject) {
+    @IBAction func cancel(_ sender: AnyObject) {
         // go back
         serial.stopScan()
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func tryAgain(sender: AnyObject) {
+    @IBAction func tryAgain(_ sender: AnyObject) {
         // empty array an start again
         peripherals = []
         tableView.reloadData()
-        tryAgainButton.enabled = false
+        tryAgainButton.isEnabled = false
         title = "Scanning ..."
         serial.startScan()
-        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(ScannerViewController.scanTimeOut), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(ScannerViewController.scanTimeOut), userInfo: nil, repeats: false)
     }
     
 }

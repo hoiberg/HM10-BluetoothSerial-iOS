@@ -23,9 +23,9 @@ final class PreferencesTableViewController: UITableViewController {
         super.viewDidLoad()
         
         // get current prefs
-        selectedMessageOption = MessageOption(rawValue: NSUserDefaults.standardUserDefaults().integerForKey(MessageOptionKey))
-        selectedReceivedMessageOption = ReceivedMessageOption(rawValue: NSUserDefaults.standardUserDefaults().integerForKey(ReceivedMessageOptionKey))
-        writeWithResponse = NSUserDefaults.standardUserDefaults().boolForKey(WriteWithResponseKey)
+        selectedMessageOption = MessageOption(rawValue: UserDefaults.standard.integer(forKey: MessageOptionKey))
+        selectedReceivedMessageOption = ReceivedMessageOption(rawValue: UserDefaults.standard.integer(forKey: ReceivedMessageOptionKey))
+        writeWithResponse = UserDefaults.standard.bool(forKey: WriteWithResponseKey)
         
     }
 
@@ -37,84 +37,84 @@ final class PreferencesTableViewController: UITableViewController {
     
 //MARK: UITableViewDelegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        
         // is it for the selectedMessageOption or for the selectedReceivedMessageOption? (section 0 or 1 resp.)
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             
             // first clear the old checkmark
-            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))?.accessoryType = .None
-            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0))?.accessoryType = .None
-            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0))?.accessoryType = .None
-            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0))?.accessoryType = .None
+            tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.accessoryType = .none
+            tableView.cellForRow(at: IndexPath(row: 1, section: 0))?.accessoryType = .none
+            tableView.cellForRow(at: IndexPath(row: 2, section: 0))?.accessoryType = .none
+            tableView.cellForRow(at: IndexPath(row: 3, section: 0))?.accessoryType = .none
             
             // get the newly selected option
-            let selectedCell = indexPath.row
+            let selectedCell = (indexPath as NSIndexPath).row
             selectedMessageOption = MessageOption(rawValue: selectedCell)
 
             // set new checkmark
-            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedCell, inSection: 0))?.accessoryType = UITableViewCellAccessoryType.Checkmark
+            tableView.cellForRow(at: IndexPath(row: selectedCell, section: 0))?.accessoryType = UITableViewCellAccessoryType.checkmark
             
             // and finally .. save it
-            NSUserDefaults.standardUserDefaults().setInteger(selectedCell, forKey: MessageOptionKey)
+            UserDefaults.standard.set(selectedCell, forKey: MessageOptionKey)
             
-        } else if indexPath.section == 1 {
+        } else if (indexPath as NSIndexPath).section == 1 {
             
             // first, clear the old checkmark
-            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1))?.accessoryType = .None
-            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 1))?.accessoryType = .None
+            tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.accessoryType = .none
+            tableView.cellForRow(at: IndexPath(row: 1, section: 1))?.accessoryType = .none
             
             // get the newly selected option
-            let selectedCell = indexPath.row
+            let selectedCell = (indexPath as NSIndexPath).row
             selectedReceivedMessageOption = ReceivedMessageOption(rawValue: selectedCell)
 
             // set new checkmark
-            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedCell, inSection: 1))?.accessoryType = UITableViewCellAccessoryType.Checkmark
+            tableView.cellForRow(at: IndexPath(row: selectedCell, section: 1))?.accessoryType = UITableViewCellAccessoryType.checkmark
             
             // save it
-            NSUserDefaults.standardUserDefaults().setInteger(selectedCell, forKey: ReceivedMessageOptionKey)
+            UserDefaults.standard.set(selectedCell, forKey: ReceivedMessageOptionKey)
 
-        } else if indexPath.section == 2 {
+        } else if (indexPath as NSIndexPath).section == 2 {
             
             // first, clear the old checkmark
-            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2))?.accessoryType = .None
-            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 2))?.accessoryType = .None
+            tableView.cellForRow(at: IndexPath(row: 0, section: 2))?.accessoryType = .none
+            tableView.cellForRow(at: IndexPath(row: 1, section: 2))?.accessoryType = .none
             
             // get the newly selected option
-            writeWithResponse = indexPath.row == 0 ? false : true
+            writeWithResponse = (indexPath as NSIndexPath).row == 0 ? false : true
             
             // set new checkmark
-            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: indexPath.row, inSection: 2))?.accessoryType = UITableViewCellAccessoryType.Checkmark
+            tableView.cellForRow(at: IndexPath(row: (indexPath as NSIndexPath).row, section: 2))?.accessoryType = UITableViewCellAccessoryType.checkmark
             
             // save it
-            NSUserDefaults.standardUserDefaults().setBool(writeWithResponse, forKey: WriteWithResponseKey)
+            UserDefaults.standard.set(writeWithResponse, forKey: WriteWithResponseKey)
             
             // set it
-            serial.writeType = writeWithResponse ? .WithResponse : .WithoutResponse
+            serial.writeType = writeWithResponse ? .withResponse : .withoutResponse
 
         }
         
         // deselect row
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
 
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // prevent the checkmarks from disappearing when they are scrolled out of screen and then back in
-        if indexPath.section == 0 && indexPath.row == selectedMessageOption.rawValue {
-            cell.accessoryType = .Checkmark
-        } else  if indexPath.section == 1 && indexPath.row == selectedReceivedMessageOption.rawValue {
-            cell.accessoryType = .Checkmark
-        } else if indexPath.section == 2 && indexPath.row == Int(writeWithResponse) {
-            cell.accessoryType = .Checkmark
+        if (indexPath as NSIndexPath).section == 0 && (indexPath as NSIndexPath).row == selectedMessageOption.rawValue {
+            cell.accessoryType = .checkmark
+        } else  if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == selectedReceivedMessageOption.rawValue {
+            cell.accessoryType = .checkmark
+        } else if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == (writeWithResponse ? 1 : 0) {
+            cell.accessoryType = .checkmark
         }
     }
     
     
 //MARK: IBActions
 
-    @IBAction func done(sender: AnyObject) {
+    @IBAction func done(_ sender: AnyObject) {
         // dismissssssss
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }
