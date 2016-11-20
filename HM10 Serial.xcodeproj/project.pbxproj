@@ -45,11 +45,9 @@
 		FA62F58A1B8B85B2000479B6 /* Serial-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Serial-Bridging-Header.h"; sourceTree = "<group>"; };
 		FA62F58B1B8B85B3000479B6 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		FA62F58C1B8B85B3000479B6 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		FA73A0331B78F4C5005EFDB6 /* ConnectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
 		FA73A0351B78FEB0005EFDB6 /* SerialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerialViewController.swift; sourceTree = "<group>"; };
 		FA73A0391B790C33005EFDB6 /* PreferencesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesTableViewController.swift; sourceTree = "<group>"; };
 		FA755D2F1B78B8FE00A902FE /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
-		FAEB7CE51B78998C00F1141C /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,8 +109,6 @@
 		FA5AB9681B77A30E007443C8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FAEB7CE51B78998C00F1141C /* StartViewController.swift */,
-				FA73A0331B78F4C5005EFDB6 /* ConnectViewController.swift */,
 				FA5AB9691B77A30F007443C8 /* Info.plist */,
 			);
 			name = "Supporting Files";
