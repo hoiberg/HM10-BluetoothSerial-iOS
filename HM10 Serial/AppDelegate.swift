@@ -10,7 +10,7 @@ import UIKit
 
 let MessageOptionKey = "MessageOption"
 let ReceivedMessageOptionKey = "ReceivedMessageOption"
-let WriteWithResponseKey = "WriteWithResponse"
+//let WriteWithResponseKey = "WriteWithResponse" No longer neccessary v1.1.3
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

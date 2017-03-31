@@ -43,7 +43,6 @@ final class SerialViewController: UIViewController, UITextFieldDelegate, Bluetoo
         
         // init serial
         serial = BluetoothSerial(delegate: self)
-        serial.writeType = UserDefaults.standard.bool(forKey: WriteWithResponseKey) ? .withResponse : .withoutResponse
         
         // UI
         mainTextView.text = ""

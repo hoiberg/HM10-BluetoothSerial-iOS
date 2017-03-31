@@ -92,10 +92,10 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
         }
     }
     
-    /// Whether to write to the HM10 with or without response.
+    /// Whether to write to the HM10 with or without response. Set automatically.
     /// Legit HM10 modules (from JNHuaMao) require 'Write without Response',
     /// while fake modules (e.g. from Bolutek) require 'Write with Response'.
-    var writeType: CBCharacteristicWriteType = .withoutResponse
+    private var writeType: CBCharacteristicWriteType = .withoutResponse
     
     
 //MARK: functions
@@ -242,6 +242,9 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
                 
                 // keep a reference to this characteristic so we can write to it
                 writeCharacteristic = characteristic
+                
+                // find out writeType
+                writeType = characteristic.properties.contains(.write) ? .withResponse : .withoutResponse
                 
                 // notify the delegate we're ready for communication
                 delegate.serialIsReady(peripheral)

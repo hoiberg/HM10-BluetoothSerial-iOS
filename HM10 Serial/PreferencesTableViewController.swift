@@ -14,7 +14,6 @@ final class PreferencesTableViewController: UITableViewController {
     
     var selectedMessageOption: MessageOption!
     var selectedReceivedMessageOption: ReceivedMessageOption!
-    var writeWithResponse = false
 
 
 //MARK: Functions
@@ -25,15 +24,9 @@ final class PreferencesTableViewController: UITableViewController {
         // get current prefs
         selectedMessageOption = MessageOption(rawValue: UserDefaults.standard.integer(forKey: MessageOptionKey))
         selectedReceivedMessageOption = ReceivedMessageOption(rawValue: UserDefaults.standard.integer(forKey: ReceivedMessageOptionKey))
-        writeWithResponse = UserDefaults.standard.bool(forKey: WriteWithResponseKey)
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
 //MARK: UITableViewDelegate
     
@@ -74,24 +67,6 @@ final class PreferencesTableViewController: UITableViewController {
             // save it
             UserDefaults.standard.set(selectedCell, forKey: ReceivedMessageOptionKey)
 
-        } else if (indexPath as NSIndexPath).section == 2 {
-            
-            // first, clear the old checkmark
-            tableView.cellForRow(at: IndexPath(row: 0, section: 2))?.accessoryType = .none
-            tableView.cellForRow(at: IndexPath(row: 1, section: 2))?.accessoryType = .none
-            
-            // get the newly selected option
-            writeWithResponse = (indexPath as NSIndexPath).row == 0 ? false : true
-            
-            // set new checkmark
-            tableView.cellForRow(at: IndexPath(row: (indexPath as NSIndexPath).row, section: 2))?.accessoryType = UITableViewCellAccessoryType.checkmark
-            
-            // save it
-            UserDefaults.standard.set(writeWithResponse, forKey: WriteWithResponseKey)
-            
-            // set it
-            serial.writeType = writeWithResponse ? .withResponse : .withoutResponse
-
         }
         
         // deselect row
@@ -104,8 +79,6 @@ final class PreferencesTableViewController: UITableViewController {
         if (indexPath as NSIndexPath).section == 0 && (indexPath as NSIndexPath).row == selectedMessageOption.rawValue {
             cell.accessoryType = .checkmark
         } else  if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == selectedReceivedMessageOption.rawValue {
-            cell.accessoryType = .checkmark
-        } else if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == (writeWithResponse ? 1 : 0) {
             cell.accessoryType = .checkmark
         }
     }
