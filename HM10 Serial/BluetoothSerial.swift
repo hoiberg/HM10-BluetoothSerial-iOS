@@ -3,9 +3,8 @@
 //  HM10 Serial
 //
 //  Created by Alex on 09-08-15.
-//  Copyright (c) 2015 Balancing Rock. All rights reserved.
+//  Copyright (c) 2017 Hangar42. All rights reserved.
 //
-//  IMPORTANT: Don't forget to set the variable 'writeType' or else the whole thing might not work.
 //
 
 import UIKit
@@ -66,7 +65,7 @@ extension BluetoothSerialDelegate {
 
 final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
-//MARK: Variables
+    // MARK: Variables
     
     /// The delegate object the BluetoothDelegate methods will be called upon
     var delegate: BluetoothSerialDelegate!
@@ -92,13 +91,24 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
         }
     }
     
+    /// Whether this serial is looking for advertising peripherals
+    var isScanning: Bool {
+        return centralManager.isScanning
+    }
+    
+    /// UUID of the service to look for.
+    var serviceUUID = CBUUID(string: "FFE0")
+    
+    /// UUID of the characteristic to look for.
+    var characteristicUUID = CBUUID(string: "FFE1")
+    
     /// Whether to write to the HM10 with or without response. Set automatically.
     /// Legit HM10 modules (from JNHuaMao) require 'Write without Response',
     /// while fake modules (e.g. from Bolutek) require 'Write with Response'.
     private var writeType: CBCharacteristicWriteType = .withoutResponse
     
     
-//MARK: functions
+    // MARK: functions
     
     /// Always use this to initialize an instance
     init(delegate: BluetoothSerialDelegate) {
@@ -112,12 +122,11 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
         guard centralManager.state == .poweredOn else { return }
         
         // start scanning for peripherals with correct service UUID
-        let uuid = CBUUID(string: "FFE0")
-        centralManager.scanForPeripherals(withServices: [uuid], options: nil)
+        centralManager.scanForPeripherals(withServices: [serviceUUID], options: nil)
         
         // retrieve peripherals that are already connected
         // see this stackoverflow question http://stackoverflow.com/questions/13286487
-        let peripherals = centralManager.retrieveConnectedPeripherals(withServices: [uuid])
+        let peripherals = centralManager.retrieveConnectedPeripherals(withServices: [serviceUUID])
         for peripheral in peripherals {
             delegate.serialDidDiscoverPeripheral(peripheral, RSSI: nil)
         }
@@ -174,7 +183,7 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
     }
     
     
-//MARK: CBCentralManagerDelegate functions
+    // MARK: CBCentralManagerDelegate functions
 
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         // just send it to the delegate
@@ -194,9 +203,10 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
         // First get the 0xFFE0 service
         // Then get the 0xFFE1 characteristic of this service
         // Subscribe to it & create a weak reference to it (for writing later on), 
-        // and then we're ready for communication
+        // and find out the writeType by looking at characteristic.properties.
+        // Only then we're ready for communication
 
-        peripheral.discoverServices([CBUUID(string: "FFE0")])
+        peripheral.discoverServices([serviceUUID])
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -224,19 +234,19 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
     }
     
     
-//MARK: CBPeripheralDelegate functions
+    // MARK: CBPeripheralDelegate functions
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         // discover the 0xFFE1 characteristic for all services (though there should only be one)
         for service in peripheral.services! {
-            peripheral.discoverCharacteristics([CBUUID(string: "FFE1")], for: service)
+            peripheral.discoverCharacteristics([characteristicUUID], for: service)
         }
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         // check whether the characteristic we're looking for (0xFFE1) is present - just to be sure
         for characteristic in service.characteristics! {
-            if characteristic.uuid == CBUUID(string: "FFE1") {
+            if characteristic.uuid == characteristicUUID {
                 // subscribe to this value (so we'll get notified when there is serial data for us..)
                 peripheral.setNotifyValue(true, for: characteristic)
                 
