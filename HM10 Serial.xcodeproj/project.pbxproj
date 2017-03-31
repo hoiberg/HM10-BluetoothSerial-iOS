@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FA36BB9C1B7CE40E0079C257 /* icon_no_background.png in Resources */ = {isa = PBXBuildFile; fileRef = FA36BB9B1B7CE40E0079C257 /* icon_no_background.png */; };
 		FA5AB96B1B77A30F007443C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AB96A1B77A30F007443C8 /* AppDelegate.swift */; };
 		FA5AB9701B77A30F007443C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5AB96E1B77A30F007443C8 /* Main.storyboard */; };
 		FA5AB9721B77A30F007443C8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA5AB9711B77A30F007443C8 /* Images.xcassets */; };
@@ -31,7 +30,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FA36BB9B1B7CE40E0079C257 /* icon_no_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_no_background.png; sourceTree = "<group>"; };
 		FA5AB9651B77A30E007443C8 /* Serial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Serial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA5AB9691B77A30F007443C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA5AB96A1B77A30F007443C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 				FA5AB96E1B77A30F007443C8 /* Main.storyboard */,
 				FA5AB9731B77A30F007443C8 /* LaunchScreen.xib */,
 				FA5AB9711B77A30F007443C8 /* Images.xcassets */,
-				FA36BB9B1B7CE40E0079C257 /* icon_no_background.png */,
 				FA5AB9681B77A30E007443C8 /* Supporting Files */,
 				FA62F58A1B8B85B2000479B6 /* Serial-Bridging-Header.h */,
 			);
@@ -220,7 +217,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA5AB9701B77A30F007443C8 /* Main.storyboard in Resources */,
-				FA36BB9C1B7CE40E0079C257 /* icon_no_background.png in Resources */,
 				FA5AB9751B77A30F007443C8 /* LaunchScreen.xib in Resources */,
 				FA5AB9721B77A30F007443C8 /* Images.xcassets in Resources */,
 			);
