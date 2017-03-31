@@ -2,10 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "HM10-Serial-Lite-Icon-6.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "HM10-Serial-Lite-Icon-5.png",
       "scale" : "2x"
     },
     {
