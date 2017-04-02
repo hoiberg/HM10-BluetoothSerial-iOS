@@ -10,7 +10,7 @@ import UIKit
 
 let MessageOptionKey = "MessageOption"
 let ReceivedMessageOptionKey = "ReceivedMessageOption"
-//let WriteWithResponseKey = "WriteWithResponse" No longer neccessary v1.1.3
+//let WriteWithResponseKey = "WriteWithResponse" No longer neccessary v1.1.2
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,9 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // register default user prefs
         UserDefaults.standard.register(defaults: [MessageOptionKey: MessageOption.noLineEnding.rawValue,
-                                                                ReceivedMessageOptionKey: ReceivedMessageOption.none.rawValue,
-                                                                WriteWithResponseKey: true
-            ])
+                                          ReceivedMessageOptionKey: ReceivedMessageOption.none.rawValue])
         
         return true
     }

@@ -86,8 +86,26 @@ final class PreferencesTableViewController: UITableViewController {
     
 //MARK: IBActions
 
+    @IBAction func getProVersion(_ sender: Any) {
+        UIApplication.shared.openURL(URL(string: "itms-apps://itunes.apple.com/app/id1221924372")!)
+    }
+    
     @IBAction func done(_ sender: AnyObject) {
         // dismissssssss
         dismiss(animated: true, completion: nil)
+    }
+}
+
+@IBDesignable class GradientView: UIView {
+    @IBInspectable var topColor: UIColor = UIColor.white { didSet { setNeedsDisplay() } }
+    @IBInspectable var bottomColor: UIColor = UIColor.black { didSet { setNeedsDisplay() } }
+    
+    override class var layerClass: AnyClass {
+        return CAGradientLayer.self
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        (layer as! CAGradientLayer).colors = [topColor.cgColor, bottomColor.cgColor]
     }
 }
