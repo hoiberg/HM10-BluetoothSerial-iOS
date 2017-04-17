@@ -96,6 +96,11 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
         return centralManager.isScanning
     }
     
+    /// Whether the state of the centralManager is .poweredOn
+    var isPoweredOn: Bool {
+        return centralManager.state == .poweredOn
+    }
+    
     /// UUID of the service to look for.
     var serviceUUID = CBUUID(string: "FFE0")
     
