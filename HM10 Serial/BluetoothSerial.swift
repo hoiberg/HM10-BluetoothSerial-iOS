@@ -68,7 +68,7 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
     // MARK: Variables
     
     /// The delegate object the BluetoothDelegate methods will be called upon
-    var delegate: BluetoothSerialDelegate!
+    weak var delegate: BluetoothSerialDelegate?
     
     /// The CBCentralManager this bluetooth serial handler uses for... well, everything really
     var centralManager: CBCentralManager!
@@ -133,7 +133,7 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
         // see this stackoverflow question http://stackoverflow.com/questions/13286487
         let peripherals = centralManager.retrieveConnectedPeripherals(withServices: [serviceUUID])
         for peripheral in peripherals {
-            delegate.serialDidDiscoverPeripheral(peripheral, RSSI: nil)
+            delegate?.serialDidDiscoverPeripheral(peripheral, RSSI: nil)
         }
     }
     
@@ -192,7 +192,7 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
 
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         // just send it to the delegate
-        delegate.serialDidDiscoverPeripheral(peripheral, RSSI: RSSI)
+        delegate?.serialDidDiscoverPeripheral(peripheral, RSSI: RSSI)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -202,7 +202,7 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
         connectedPeripheral = peripheral
         
         // send it to the delegate
-        delegate.serialDidConnect(peripheral)
+        delegate?.serialDidConnect(peripheral)
 
         // Okay, the peripheral is connected but we're not ready yet!
         // First get the 0xFFE0 service
@@ -219,14 +219,14 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
         pendingPeripheral = nil
 
         // send it to the delegate
-        delegate.serialDidDisconnect(peripheral, error: error as NSError?)
+        delegate?.serialDidDisconnect(peripheral, error: error as NSError?)
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         pendingPeripheral = nil
 
         // just send it to the delegate
-        delegate.serialDidFailToConnect(peripheral, error: error as NSError?)
+        delegate?.serialDidFailToConnect(peripheral, error: error as NSError?)
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -235,7 +235,7 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
         pendingPeripheral = nil
 
         // send it to the delegate
-        delegate.serialDidChangeState()
+        delegate?.serialDidChangeState()
     }
     
     
@@ -262,7 +262,7 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
                 writeType = characteristic.properties.contains(.write) ? .withResponse : .withoutResponse
                 
                 // notify the delegate we're ready for communication
-                delegate.serialIsReady(peripheral)
+                delegate?.serialIsReady(peripheral)
             }
         }
     }
@@ -274,11 +274,11 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
         guard data != nil else { return }
         
         // first the data
-        delegate.serialDidReceiveData(data!)
+        delegate?.serialDidReceiveData(data!)
         
         // then the string
         if let str = String(data: data!, encoding: String.Encoding.utf8) {
-            delegate.serialDidReceiveString(str)
+            delegate?.serialDidReceiveString(str)
         } else {
             //print("Received an invalid string!") uncomment for debugging
         }
@@ -286,10 +286,10 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
         // now the bytes array
         var bytes = [UInt8](repeating: 0, count: data!.count / MemoryLayout<UInt8>.size)
         (data! as NSData).getBytes(&bytes, length: data!.count)
-        delegate.serialDidReceiveBytes(bytes)
+        delegate?.serialDidReceiveBytes(bytes)
     }
     
     func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
-        delegate.serialDidReadRSSI(RSSI)
+        delegate?.serialDidReadRSSI(RSSI)
     }
 }
