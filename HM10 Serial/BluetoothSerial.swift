@@ -14,7 +14,7 @@ import CoreBluetooth
 var serial: BluetoothSerial!
 
 // Delegate functions
-protocol BluetoothSerialDelegate {
+protocol BluetoothSerialDelegate: class {
     // ** Required **
     
     /// Called when de state of the CBCentralManager changes (e.g. when bluetooth is turned on/off)
