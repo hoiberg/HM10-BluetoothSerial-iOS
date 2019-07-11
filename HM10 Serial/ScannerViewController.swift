@@ -59,7 +59,7 @@ final class ScannerViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     /// Should be called 10s after we've begun scanning
-    func scanTimeOut() {
+    @objc func scanTimeOut() {
         // timeout has occurred, stop scanning and give the user the option to try again
         serial.stopScan()
         tryAgainButton.isEnabled = true
@@ -67,7 +67,7 @@ final class ScannerViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     /// Should be called 10s after we've begun connecting
-    func connectTimeOut() {
+    @objc func connectTimeOut() {
         
         // don't if we've already connected
         if let _ = serial.connectedPeripheral {
@@ -137,7 +137,7 @@ final class ScannerViewController: UIViewController, UITableViewDataSource, UITa
         
         // add to the array, next sort & reload
         let theRSSI = RSSI?.floatValue ?? 0.0
-        peripherals.append(peripheral: peripheral, RSSI: theRSSI)
+        peripherals.append((peripheral: peripheral, RSSI: theRSSI))
         peripherals.sort { $0.RSSI < $1.RSSI }
         tableView.reloadData()
     }

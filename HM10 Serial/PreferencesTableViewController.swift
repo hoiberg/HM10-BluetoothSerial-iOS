@@ -46,7 +46,7 @@ final class PreferencesTableViewController: UITableViewController {
             selectedMessageOption = MessageOption(rawValue: selectedCell)
 
             // set new checkmark
-            tableView.cellForRow(at: IndexPath(row: selectedCell, section: 0))?.accessoryType = UITableViewCellAccessoryType.checkmark
+            tableView.cellForRow(at: IndexPath(row: selectedCell, section: 0))?.accessoryType = UITableViewCell.AccessoryType.checkmark
             
             // and finally .. save it
             UserDefaults.standard.set(selectedCell, forKey: MessageOptionKey)
@@ -62,7 +62,7 @@ final class PreferencesTableViewController: UITableViewController {
             selectedReceivedMessageOption = ReceivedMessageOption(rawValue: selectedCell)
 
             // set new checkmark
-            tableView.cellForRow(at: IndexPath(row: selectedCell, section: 1))?.accessoryType = UITableViewCellAccessoryType.checkmark
+            tableView.cellForRow(at: IndexPath(row: selectedCell, section: 1))?.accessoryType = UITableViewCell.AccessoryType.checkmark
             
             // save it
             UserDefaults.standard.set(selectedCell, forKey: ReceivedMessageOptionKey)

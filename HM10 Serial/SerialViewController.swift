@@ -51,8 +51,8 @@ final class SerialViewController: UIViewController, UITextFieldDelegate, Bluetoo
         NotificationCenter.default.addObserver(self, selector: #selector(SerialViewController.reloadView), name: NSNotification.Name(rawValue: "reloadStartViewController"), object: nil)
         
         // we want to be notified when the keyboard is shown (so we can move the textField up)
-        NotificationCenter.default.addObserver(self, selector: #selector(SerialViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SerialViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SerialViewController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SerialViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         // to dismiss the keyboard if the user taps outside the textField while editing
         let tap = UITapGestureRecognizer(target: self, action: #selector(SerialViewController.dismissKeyboard))
@@ -71,29 +71,29 @@ final class SerialViewController: UIViewController, UITextFieldDelegate, Bluetoo
         NotificationCenter.default.removeObserver(self)
     }
     
-    func keyboardWillShow(_ notification: Notification) {
+    @objc func keyboardWillShow(_ notification: Notification) {
         // animate the text field to stay above the keyboard
         var info = (notification as NSNotification).userInfo!
-        let value = info[UIKeyboardFrameEndUserInfoKey] as! NSValue
+        let value = info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
         let keyboardFrame = value.cgRectValue
         
         //TODO: Not animating properly
-        UIView.animate(withDuration: 1, delay: 0, options: UIViewAnimationOptions(), animations: { () -> Void in
+        UIView.animate(withDuration: 1, delay: 0, options: UIView.AnimationOptions(), animations: { () -> Void in
             self.bottomConstraint.constant = keyboardFrame.size.height
             }, completion: { Bool -> Void in
             self.textViewScrollToBottom()
         })
     }
     
-    func keyboardWillHide(_ notification: Notification) {
+    @objc func keyboardWillHide(_ notification: Notification) {
         // bring the text field back down..
-        UIView.animate(withDuration: 1, delay: 0, options: UIViewAnimationOptions(), animations: { () -> Void in
+        UIView.animate(withDuration: 1, delay: 0, options: UIView.AnimationOptions(), animations: { () -> Void in
             self.bottomConstraint.constant = 0
         }, completion: nil)
 
     }
     
-    func reloadView() {
+    @objc func reloadView() {
         // in case we're the visible view again
         serial.delegate = self
         
@@ -157,7 +157,7 @@ final class SerialViewController: UIViewController, UITextFieldDelegate, Bluetoo
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if !serial.isReady {
             let alert = UIAlertController(title: "Not connected", message: "What am I supposed to send this to?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: { action -> Void in self.dismiss(animated: true, completion: nil) }))
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: { action -> Void in self.dismiss(animated: true, completion: nil) }))
             present(alert, animated: true, completion: nil)
             messageField.resignFirstResponder()
             return true
@@ -184,7 +184,7 @@ final class SerialViewController: UIViewController, UITextFieldDelegate, Bluetoo
         return true
     }
     
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         messageField.resignFirstResponder()
     }
     
