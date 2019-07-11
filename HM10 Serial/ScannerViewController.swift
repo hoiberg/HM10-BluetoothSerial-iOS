@@ -122,6 +122,7 @@ final class ScannerViewController: UIViewController, UITableViewDataSource, UITa
         progressHUD = MBProgressHUD.showAdded(to: view, animated: true)
         progressHUD!.labelText = "Connecting"
         
+        // TODO: Timer doesn't use connecting ID
         Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(ScannerViewController.connectTimeOut), userInfo: nil, repeats: false)
     }
     
