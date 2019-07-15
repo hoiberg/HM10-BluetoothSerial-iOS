@@ -194,10 +194,9 @@
 			};
 			buildConfigurationList = FA5AB9601B77A30E007443C8 /* Build configuration list for PBXProject "HM10 Serial" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
