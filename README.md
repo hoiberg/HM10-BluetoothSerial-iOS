@@ -6,7 +6,9 @@ It is available for free on the [App Store](https://itunes.apple.com/us/app/hm10
 The helper class for the bluetooth communication can also be found [here](https://github.com/hoiberg/SwiftBluetoothSerial).
 
 ## Pro Version
-A Pro version is also available on the App Store --> [HM10 Bluetooth Serial Pro](https://itunes.apple.com/us/app/hm10-bluetooth-serial-pro/id1221924372?ls=1&mt=8).
+~~A Pro version is also available on the App Store --> [HM10 Bluetooth Serial Pro](https://itunes.apple.com/us/app/hm10-bluetooth-serial-pro/id1221924372?ls=1&mt=8).~~
+
+The source code of the Pro version is published [here](https://github.com/hoiberg/BluetoothSerialPro). The code has not been updated in a long time, so it might not readily compile.
 
 It has a tonne more features to help debugging HM10 applications, and also supports creating custom buttons to send pre-set messages.
 
